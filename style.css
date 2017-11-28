@@ -1,0 +1,69 @@
+body {
+    background-color: #ce96a6;
+    font-family: 'Source Sans Pro';
+}
+
+header {
+    color: #272635;
+    text-align: center;
+    font-size: 2rem;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+h3 {
+    margin: 10px 0;
+}
+
+.newTask {
+    display:flex;
+    position: relative;
+    right: -30px;
+    top: -10px;
+}
+
+.newTask:hover {
+    cursor: pointer;
+}
+
+.newTask p {
+    margin: 0;
+}
+
+.fa-plus {
+    align-self: center;
+}
+
+.category {
+    display: inline-flex;
+    padding: 20px;
+    background-color: #ffede1;
+    width: 125px;
+    height: 300px;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    overflow-y: scroll;
+}
+
+#addCategory {
+    justify-content: center;
+    text-align: center;
+} 
+
+#addCategory i {
+    font-size: 2rem;
+}
+
+#addCategory:hover {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
