@@ -1,5 +1,9 @@
 window.onload = function() {
     var board = document.querySelector('#board');
+    var selectAddTask = document.querySelectorAll('.addTask');
+    selectAddTask[0].onclick = function() {
+        this.parentElement.appendChild(newTask());
+    };
 
     function newCategory() {
         var addTask = document.createElement('div');
@@ -19,16 +23,20 @@ window.onload = function() {
         newTask.className = 'task';
         newTask.appendChild(document.createElement('h3'));
         newTask.querySelector('h3').innerHTML = 'Task title';
+        newTask.querySelector('h3').setAttribute('contenteditable', 'true');
         newTask.appendChild(document.createElement('p'));
         newTask.querySelector('p').innerHTML = 'Add description';
+        newTask.querySelector('p').setAttribute('contenteditable', 'true');
         return newTask;
     }
 
     document.querySelector('#addCategory').onclick = function() {
         board.insertBefore(newCategory(), this);
-    };
-
-    document.querySelector('.addTask').onclick = function() {
-        this.parentElement.appendChild(newTask());
+        selectAddTask = document.querySelectorAll('.addTask');
+        for (i = 0; i < selectAddTask.length; i++) {
+            selectAddTask[i].onclick = function() {
+                this.parentElement.appendChild(newTask());
+            };
+        }
     };
 };

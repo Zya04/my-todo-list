@@ -19,18 +19,18 @@ h3 {
     margin: 10px 0;
 }
 
-.newTask {
+.addTask {
     display:flex;
     position: relative;
     right: -30px;
     top: -10px;
 }
 
-.newTask:hover {
+.addTask:hover {
     cursor: pointer;
 }
 
-.newTask p {
+.addTask p {
     margin: 0;
 }
 
