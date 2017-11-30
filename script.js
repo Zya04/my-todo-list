@@ -1,15 +1,13 @@
 window.onload = function() {
     var board = document.querySelector('#board');
-    var model = document.querySelectorAll('#model');
 
-    //creating the block, didn't use .cloneNode()
     function newCategory() {
-        var newTask = document.createElement('div');
-        newTask.className='newTask';
-        newTask.appendChild(document.createElement('p'));
-        newTask.querySelector('p').innerHTML = 'New Task';
-        newTask.appendChild(document.createElement('i'));
-        newTask.querySelector('i').className = 'fa fa-plus';
+        var addTask = document.createElement('div');
+        addTask.className='addTask';
+        addTask.appendChild(document.createElement('p'));
+        addTask.querySelector('p').innerHTML = 'New Task';
+        addTask.appendChild(document.createElement('i'));
+        addTask.querySelector('i').className = 'fa fa-plus';
         var newCategory = document.createElement('div');
         newCategory.className = 'category';
         newCategory.appendChild(newTask);
@@ -17,6 +15,6 @@ window.onload = function() {
     }
 
     document.querySelector('#addCategory').onclick = function() {
-        board.insertBefore(newCategory(), addCategory);
+        board.insertBefore(newCategory(), this);
     };
 };
