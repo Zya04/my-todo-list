@@ -1,8 +1,11 @@
 window.onload = function() {
     var board = document.querySelector('#board');
-    var selectAddTask = document.querySelectorAll('.addTask');
-    selectAddTask[0].onclick = function() {
+    var addTaskButton = document.querySelectorAll('.addTask');
+    addTaskButton[0].onclick = function() {
         this.parentElement.parentElement.appendChild(newTask());
+    };
+    document.querySelector('.removeCategory').onclick = function() {
+        board.removeChild(document.getElementById('1'));
     };
 
     function newCategory() {
@@ -23,6 +26,9 @@ window.onload = function() {
         var newCategory = document.createElement('div');
         newCategory.className = 'category';
         newCategory.appendChild(categoryActions);
+        removeCategory.onclick = function() {
+            board.removeChild(newCategory);
+        };
         return newCategory;
     }
 
@@ -40,9 +46,9 @@ window.onload = function() {
 
     document.querySelector('#addCategory').onclick = function() {
         board.insertBefore(newCategory(), this);
-        selectAddTask = document.querySelectorAll('.addTask');
-        for (i = 0; i < selectAddTask.length; i++) {
-            selectAddTask[i].onclick = function() {
+        addTaskButton = document.querySelectorAll('.addTask');
+        for (i = 0; i < addTaskButton.length; i++) {
+            addTaskButton[i].onclick = function() {
                 this.parentElement.parentElement.appendChild(newTask());
             };
         }
