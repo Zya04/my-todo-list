@@ -22,11 +22,9 @@ h3 {
 .addTask {
     display:flex;
     position: relative;
-    right: -30px;
-    top: -10px;
 }
 
-.addTask:hover {
+.addTask:hover, .removeCategory:hover {
     cursor: pointer;
 }
 
@@ -34,13 +32,19 @@ h3 {
     margin: 0;
 }
 
-.fa-plus {
+.actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fa {
     align-self: center;
 }
 
 .category {
     display: inline-flex;
-    padding: 20px;
+    padding: 10px;
     background-color: #ffede1;
     width: 125px;
     height: 300px;
