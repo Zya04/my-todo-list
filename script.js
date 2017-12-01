@@ -2,19 +2,27 @@ window.onload = function() {
     var board = document.querySelector('#board');
     var selectAddTask = document.querySelectorAll('.addTask');
     selectAddTask[0].onclick = function() {
-        this.parentElement.appendChild(newTask());
+        this.parentElement.parentElement.appendChild(newTask());
     };
 
     function newCategory() {
+        var removeCategory = document.createElement('div');
+        removeCategory.className = 'removeCategory';
+        removeCategory.appendChild(document.createElement('i'));
+        removeCategory.querySelector('i').className = 'fa fa-times';
         var addTask = document.createElement('div');
         addTask.className='addTask';
         addTask.appendChild(document.createElement('p'));
         addTask.querySelector('p').innerHTML = 'New Task';
         addTask.appendChild(document.createElement('i'));
         addTask.querySelector('i').className = 'fa fa-plus';
+        var categoryActions = document.createElement('div');
+        categoryActions.className = 'actions';
+        categoryActions.appendChild(removeCategory);
+        categoryActions.appendChild(addTask);
         var newCategory = document.createElement('div');
         newCategory.className = 'category';
-        newCategory.appendChild(addTask);
+        newCategory.appendChild(categoryActions);
         return newCategory;
     }
 
@@ -35,7 +43,7 @@ window.onload = function() {
         selectAddTask = document.querySelectorAll('.addTask');
         for (i = 0; i < selectAddTask.length; i++) {
             selectAddTask[i].onclick = function() {
-                this.parentElement.appendChild(newTask());
+                this.parentElement.parentElement.appendChild(newTask());
             };
         }
     };
