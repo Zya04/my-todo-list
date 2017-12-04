@@ -75,7 +75,6 @@ h3 {
 }
 
 .overlay{
-    display: none;
     position: absolute; 
     top: 0;
     bottom: 0;
@@ -88,16 +87,13 @@ h3 {
 }
 
 .popup{
-    position: relative;
+    position: absolute;
     z-index: 2;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     background-color: #FFFFFF;
     text-align: center;
     border-radius: 5px;
-    display: none;
     padding: 5px;   
     
 }
