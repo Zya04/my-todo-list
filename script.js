@@ -1,56 +1,59 @@
 window.onload = function() {
-    var board = document.querySelector('#board');
-    var addTaskButton = document.querySelectorAll('.addTask');
-    addTaskButton[0].onclick = function() {
-        this.parentElement.parentElement.appendChild(newTask());
-    };
-    document.querySelector('.removeCategory').onclick = function() {
-        board.removeChild(document.getElementById('1'));
-    };
+    board = document.querySelector('#board');
+    addCategory = document.querySelector('#addCategory');
+    newTaskButton = document.querySelector('.addTask');
+    
 
     function newCategory() {
-        var removeCategory = document.createElement('div');
+        //Crée le bouton pour supprimer la catégorie
+        removeCategory = document.createElement('div');
         removeCategory.className = 'removeCategory';
         removeCategory.appendChild(document.createElement('i'));
         removeCategory.querySelector('i').className = 'fa fa-times';
-        var addTask = document.createElement('div');
-        addTask.className='addTask';
-        addTask.appendChild(document.createElement('p'));
-        addTask.querySelector('p').innerHTML = 'New Task';
-        addTask.appendChild(document.createElement('i'));
-        addTask.querySelector('i').className = 'fa fa-plus';
-        var categoryActions = document.createElement('div');
+
+        //Crée le bouton pour ajouter une tâche
+        addTaskButton = document.createElement('div');
+        addTaskButton.className='addTask';
+        addTaskButton.appendChild(document.createElement('p'));
+        addTaskButton.querySelector('p').innerHTML = 'New Task';
+        addTaskButton.appendChild(document.createElement('i'));
+        addTaskButton.querySelector('i').className = 'fa fa-plus';
+
+        //rassemble les deux boutons
+        categoryActions = document.createElement('div');
         categoryActions.className = 'actions';
         categoryActions.appendChild(removeCategory);
-        categoryActions.appendChild(addTask);
-        var newCategory = document.createElement('div');
-        newCategory.className = 'category';
-        newCategory.appendChild(categoryActions);
+        categoryActions.appendChild(addTaskButton);
+
+        //Crée la catégorie
+        category = document.createElement('div');
+        category.className = 'category';
+        //On ajoute à la catégorie les boutons d'actions supprimer / nouvelle tâche
+        category.appendChild(categoryActions);
+
         removeCategory.onclick = function() {
-            board.removeChild(newCategory);
+            this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement);
         };
-        return newCategory;
-    }
 
-    function newTask() {
-        var newTask = document.createElement('div');
-        newTask.className = 'task';
-        newTask.appendChild(document.createElement('h3'));
-        newTask.querySelector('h3').innerHTML = 'Task title';
-        newTask.querySelector('h3').setAttribute('contenteditable', 'true');
-        newTask.appendChild(document.createElement('p'));
-        newTask.querySelector('p').innerHTML = 'Add description';
-        newTask.querySelector('p').setAttribute('contenteditable', 'true');
-        return newTask;
-    }
+        addTaskButton.onclick = function() {
+            this.parentElement.parentElement.appendChild(newTask());
+        };
 
-    document.querySelector('#addCategory').onclick = function() {
+        return category;
+    };
+
+    function newTask() {
+        task = document.createElement('div');
+        task.className = 'task';
+        task.appendChild(document.createElement('h3'));
+        task.querySelector('h3').innerHTML = 'Task title';
+        task.appendChild(document.createElement('p'));
+        task.querySelector('p').innerHTML = 'Add description';
+        
+        return task;
+    };
+
+    addCategory.onclick = function() {
         board.insertBefore(newCategory(), this);
-        addTaskButton = document.querySelectorAll('.addTask');
-        for (i = 0; i < addTaskButton.length; i++) {
-            addTaskButton[i].onclick = function() {
-                this.parentElement.parentElement.appendChild(newTask());
-            };
-        }
     };
 };
