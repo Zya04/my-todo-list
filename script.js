@@ -55,8 +55,7 @@ function newTask() {
     task.appendChild(newPopup());
     task.appendChild(newOverlay());
     task.onclick = function(event) {
-        
-        if (event.target == popup.querySelector('.close-popup')) {
+        if (event.target == popup.querySelector('.close-popup') || event.target == popup.querySelector('.btn-task')) {
             return false;
         }
         task.querySelector('.popup').className = 'popup';
@@ -75,11 +74,11 @@ function newPopup() {
     popup.className = 'popup hidden';
     popup.appendChild(document.createElement('i'));
     popup.querySelector('i').className = 'fa fa-times close-popup';
-    categoryName = document.createElement('h2');
-    categoryName.innerHTML = 'Category name: '
-    inputCategoryName = document.createElement('input');
-    inputCategoryName.setAttribute('type', 'text');
-    inputCategoryName.setAttribute('name', 'category-name');
+    //categoryName = document.createElement('h2');
+    //categoryName.innerHTML = 'Category name: '
+    //inputCategoryName = document.createElement('input');
+    //inputCategoryName.setAttribute('type', 'text');
+    //inputCategoryName.setAttribute('name', 'category-name');
     taskTitle = document.createElement('h3');
     taskTitle.innerHTML = 'Task title: '
     inputTaskTitle = document.createElement('input');
@@ -101,6 +100,13 @@ function newPopup() {
     popup.appendChild(description);
     popup.appendChild(textDescription);
     popup.appendChild(confirmButton);
+
+    confirmButton.onclick = function() {
+        task.querySelector('h3').innerHTML = popup.querySelector('input[name="task-title"]').value;
+        task.querySelector('p').innerHTML = popup.querySelector('textarea').value;
+        task.querySelector('.popup').className = 'popup hidden';
+        task.querySelector('.overlay').className = 'overlay hidden';
+    };
 
     return popup;
 }
