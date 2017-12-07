@@ -54,13 +54,15 @@ function newTask() {
     task.querySelector('p').innerHTML = 'Add description';
     task.appendChild(newPopup());
     task.appendChild(newOverlay());
-    task.onclick = function() {
+    task.onclick = function(event) {
+        
+        if (event.target == popup.querySelector('.close-popup')) {
+            return false;
+        }
         task.querySelector('.popup').className = 'popup';
         task.querySelector('.overlay').className = 'overlay';
     };
     popup.querySelector('.close-popup').onclick = function() {
-        console.log('coucou');
-        console.log(task.querySelector('.popup'));
         task.querySelector('.popup').className = 'popup hidden';
         task.querySelector('.overlay').className = 'overlay hidden';
     };
