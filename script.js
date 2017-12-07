@@ -10,6 +10,10 @@ window.onload = function() {
 
 function newCategory() {
     //Crée le bouton pour supprimer la catégorie
+    categoryTitle = document.createElement('h3');
+    categoryTitle.innerHTML = 'Category title';
+    categoryTitle.className = 'category-title';
+    categoryTitle.setAttribute('contenteditable','true');
     removeCategory = document.createElement('div');
     removeCategory.className = 'removeCategory';
     removeCategory.appendChild(document.createElement('i'));
@@ -33,7 +37,9 @@ function newCategory() {
     category = document.createElement('div');
     category.className = 'category';
     //On ajoute à la catégorie les boutons d'actions supprimer / nouvelle tâche
+    
     category.appendChild(categoryActions);
+    category.appendChild(categoryTitle);
 
     removeCategory.onclick = function() {
         this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement);
