@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('../assets/fonts/SourceSansPro-Regular.ttf');
+}
+
 body {
     background-color: #875081;
     font-family: 'Source Sans Pro';
@@ -9,10 +14,9 @@ header {
     font-size: 2rem;
 }
 
-main {
+#board {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
 
 }
 
@@ -117,7 +121,10 @@ h3 {
     text-align: center;
     border-radius: 5px;
     padding: 5px;   
-    
+}
+
+.popup:hover{
+    cursor: default;
 }
 
 .overlay{
@@ -152,6 +159,6 @@ textarea {
     right: 0;
     top: 0;
 }
-.close-popup:hover{
+.close-popup:hover, div .task:hover{
     cursor: pointer;
 }
