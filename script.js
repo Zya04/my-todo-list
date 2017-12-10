@@ -64,6 +64,7 @@ function newTask() {
         if (event.target == this.querySelector('.popup').querySelector('.close-popup') || event.target == this.querySelector('.popup').querySelector('.btn-task')) {
             return false;
         }
+        this.querySelector('.popup').querySelector('h2').innerHTML = this.parentElement.querySelector('h3').innerHTML;
         this.querySelector('.popup').className = 'popup';
         this.querySelector('.overlay').className = 'overlay';
     };
@@ -80,11 +81,8 @@ function newPopup() {
     popup.className = 'popup hidden';
     popup.appendChild(document.createElement('i'));
     popup.querySelector('i').className = 'fa fa-times close-popup';
-    //categoryName = document.createElement('h2');
-    //categoryName.innerHTML = 'Category name: '
-    //inputCategoryName = document.createElement('input');
-    //inputCategoryName.setAttribute('type', 'text');
-    //inputCategoryName.setAttribute('name', 'category-name');
+    categoryName = document.createElement('h2');
+    //categoryName.innerHTML = popup.parentElement.querySelector('h3').value;
     taskTitle = document.createElement('h3');
     taskTitle.innerHTML = 'Task title: '
     inputTaskTitle = document.createElement('input');
@@ -102,7 +100,7 @@ function newPopup() {
     confirmButton.className = 'btn-task';
     confirmButton.innerHTML = 'Save';
     //********************************************/
-    // popup.appendChild(categoryName);
+    popup.appendChild(categoryName);
     // popup.appendChild(inputCategoryName);
     popup.appendChild(taskTitle);
     popup.appendChild(inputTaskTitle);
