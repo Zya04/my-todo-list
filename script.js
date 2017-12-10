@@ -95,6 +95,9 @@ function newPopup() {
     textDescription = document.createElement('textarea');
     textDescription.setAttribute('cols', '35');
     textDescription.setAttribute('rows', '5');
+    deleteTask = document.createElement('button');
+    deleteTask.className = 'delete-task';
+    deleteTask.innerHTML = 'Delete task';
     confirmButton = document.createElement('button');
     confirmButton.className = 'btn-task';
     confirmButton.innerHTML = 'Save';
@@ -105,6 +108,7 @@ function newPopup() {
     popup.appendChild(inputTaskTitle);
     popup.appendChild(description);
     popup.appendChild(textDescription);
+    popup.appendChild(deleteTask);
     popup.appendChild(confirmButton);
 
     confirmButton.onclick = function() {
@@ -113,6 +117,11 @@ function newPopup() {
         this.parentElement.parentElement.querySelector('.popup').className = 'popup hidden';
         this.parentElement.parentElement.querySelector('.overlay').className = 'overlay hidden';
     };
+
+    deleteTask.onclick = function() {
+        this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement);
+    };
+
     return popup;
 }
 function newOverlay() {
