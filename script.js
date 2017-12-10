@@ -1,8 +1,25 @@
 window.onload = function() {
+    newStyle = document.createElement("style");
+    newStyle.type = "text/css"; 
+    document.head.insertBefore(newStyle, null);
+    styleSheet = newStyle.sheet;
+    styleSheet.insertRule(".category{background-color: #DED9E2;}");
+
     board = document.querySelector('#board');
     addCategory = document.querySelector('#addCategory');
     newTaskButton = document.querySelector('.addTask');
+    backgroundColorButton = document.querySelector('#background-color');
+    categoriesColorButton = document.querySelector('#category-color');
 
+    backgroundColorButton.onchange = function() {
+        document.body.style.backgroundColor = this.value;
+    };
+    categoriesColorButton.onchange = function() {
+        styleSheet.deleteRule(0);
+        console.log(this.value);
+        styleSheet.insertRule(".category{background-color: "+this.value+";}");
+    };
+    
     addCategory.onclick = function() {
         board.insertBefore(newCategory(), this);
     };
