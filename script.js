@@ -68,8 +68,8 @@ function newTask() {
         this.querySelector('.overlay').className = 'overlay';
     };
     popup.querySelector('.close-popup').onclick = function() {
-        task.querySelector('.popup').className = 'popup hidden';
-        task.querySelector('.overlay').className = 'overlay hidden';
+        this.parentElement.parentElement.querySelector('.popup').className = 'popup hidden';
+        this.parentElement.parentElement.querySelector('.overlay').className = 'overlay hidden';
     };
 
     return task;
