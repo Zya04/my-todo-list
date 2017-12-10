@@ -61,11 +61,11 @@ function newTask() {
     task.appendChild(newPopup());
     task.appendChild(newOverlay());
     task.onclick = function(event) {
-        if (event.target == popup.querySelector('.close-popup') || event.target == popup.querySelector('.btn-task')) {
+        if (event.target == this.querySelector('.popup').querySelector('.close-popup') || event.target == this.querySelector('.popup').querySelector('.btn-task')) {
             return false;
         }
-        task.querySelector('.popup').className = 'popup';
-        task.querySelector('.overlay').className = 'overlay';
+        this.querySelector('.popup').className = 'popup';
+        this.querySelector('.overlay').className = 'overlay';
     };
     popup.querySelector('.close-popup').onclick = function() {
         task.querySelector('.popup').className = 'popup hidden';
@@ -108,12 +108,11 @@ function newPopup() {
     popup.appendChild(confirmButton);
 
     confirmButton.onclick = function() {
-        task.querySelector('h3').innerHTML = popup.querySelector('input[name="task-title"]').value;
-        task.querySelector('p').innerHTML = popup.querySelector('textarea').value;
-        task.querySelector('.popup').className = 'popup hidden';
-        task.querySelector('.overlay').className = 'overlay hidden';
+        this.parentElement.parentElement.querySelector('h3').innerHTML = this.parentElement.querySelector('input[name="task-title"]').value;
+        this.parentElement.parentElement.querySelector('p').innerHTML = this.parentElement.querySelector('textarea').value;
+        this.parentElement.parentElement.querySelector('.popup').className = 'popup hidden';
+        this.parentElement.parentElement.querySelector('.overlay').className = 'overlay hidden';
     };
-
     return popup;
 }
 function newOverlay() {
