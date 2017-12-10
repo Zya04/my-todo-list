@@ -32,7 +32,7 @@ a {
 
 h3 {
     margin: 10px 0;
-    width: 140px;
+    width: 120px;
 }
 
 h3[contenteditable='true'] {
@@ -67,7 +67,7 @@ h3[contenteditable='true'] {
     display: inline-flex;
     padding: 10px;
     background-color: #ded9e2;
-    width: 145px;
+    width: 130px;
     height: 300px;
     border-radius: 10px;
     flex-direction: column;
@@ -174,7 +174,7 @@ textarea {
     background-color: rgba(0, 0, 0, .1);
     border-radius: 5px;
     padding: 5px;
-    margin: 3px;
+    margin: 4px;
 }
 
 .close-popup:hover, div .task:hover{
