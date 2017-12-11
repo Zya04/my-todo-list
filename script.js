@@ -104,7 +104,6 @@ function newPopup() {
     popup.appendChild(document.createElement('i'));
     popup.querySelector('i').className = 'fa fa-times close-popup';
     categoryName = document.createElement('h2');
-    //categoryName.innerHTML = popup.parentElement.querySelector('h3').value;
     taskTitle = document.createElement('h3');
     taskTitle.innerHTML = 'Task title: '
     inputTaskTitle = document.createElement('input');
@@ -115,9 +114,6 @@ function newPopup() {
     textDescription = document.createElement('textarea');
     textDescription.setAttribute('cols', '35');
     textDescription.setAttribute('rows', '5');
-    deleteTask = document.createElement('button');
-    deleteTask.className = 'delete-task';
-    deleteTask.innerHTML = 'Delete task';
     confirmButton = document.createElement('button');
     confirmButton.className = 'btn-task';
     confirmButton.innerHTML = 'Save';
@@ -128,7 +124,6 @@ function newPopup() {
     popup.appendChild(inputTaskTitle);
     popup.appendChild(description);
     popup.appendChild(textDescription);
-    popup.appendChild(deleteTask);
     popup.appendChild(confirmButton);
 
     confirmButton.onclick = function() {
