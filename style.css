@@ -190,6 +190,12 @@ textarea {
     margin: 4px;
 }
 
+.task span {
+    position: relative;
+    top: -5px;
+    right: 10px;
+}
+
 .close-popup:hover, div .task:hover{
     cursor: pointer;
 }

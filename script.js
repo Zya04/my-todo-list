@@ -71,14 +71,19 @@ function newCategory() {
 function newTask() {
     task = document.createElement('div');
     task.className = 'task';
+    task.appendChild(document.createElement('span'));
+    task.querySelector('span').innerHTML = "&times;";
     task.appendChild(document.createElement('h3'));
     task.querySelector('h3').innerHTML = 'Task title';
     task.appendChild(document.createElement('p'));
     task.querySelector('p').innerHTML = 'Add description';
     task.appendChild(newPopup());
     task.appendChild(newOverlay());
+    task.querySelector('span').onclick = function() {
+        this.parentElement.parentElement.removeChild(this.parentElement);
+    };
     task.onclick = function(event) {
-        if (event.target == this.querySelector('.popup').querySelector('.close-popup') || event.target == this.querySelector('.popup').querySelector('.btn-task')) {
+        if (event.target == this.querySelector('.popup').querySelector('.close-popup') || event.target == this.querySelector('.popup').querySelector('.btn-task') || event.target == this.querySelector('span')) {
             return false;
         }
         this.querySelector('.popup').querySelector('h2').innerHTML = this.parentElement.querySelector('h3').innerHTML;
@@ -131,10 +136,6 @@ function newPopup() {
         this.parentElement.parentElement.querySelector('p').innerHTML = this.parentElement.querySelector('textarea').value;
         this.parentElement.parentElement.querySelector('.popup').className = 'popup hidden';
         this.parentElement.parentElement.querySelector('.overlay').className = 'overlay hidden';
-    };
-
-    deleteTask.onclick = function() {
-        this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement);
     };
 
     return popup;
