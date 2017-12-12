@@ -1,4 +1,7 @@
 window.onload = function() {
+    if (typeof localStorage.work != 'undefined') {
+        document.querySelector('#board').innerHTML = localStorage.work;
+    }
     newStyle = document.createElement("style");
     newStyle.type = "text/css"; 
     document.head.insertBefore(newStyle, null);
@@ -22,8 +25,11 @@ window.onload = function() {
     
     addCategory.onclick = function() {
         board.insertBefore(newCategory(), this);
+        saveWork();
     };
 };
+
+
 
 function newCategory() {
     //Crée le bouton pour supprimer la catégorie
@@ -57,20 +63,32 @@ function newCategory() {
     
     category.appendChild(categoryActions);
     category.appendChild(categoryTitle);
+    // category.ondragover = function(event) {
+    //     dragover_handler(event)
+    // };
+    // category.ondrop = function(event) {
+    //     drop_handler(event)
+    // };
+    categoryTitle.onblur = function() {
+        saveWork();
+    }
 
     removeCategory.onclick = function() {
         this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement);
+        saveWork();
     };
 
     addTaskButton.onclick = function() {
         this.parentElement.parentElement.appendChild(newTask());
-    };
+        saveWork();
+    }
     return category;
 };
 
 function newTask() {
     task = document.createElement('div');
     task.className = 'task';
+    task.setAttribute('draggable', 'true');
     task.appendChild(document.createElement('span'));
     task.querySelector('span').innerHTML = "&times;";
     task.appendChild(document.createElement('h3'));
@@ -89,11 +107,17 @@ function newTask() {
         this.querySelector('.popup').querySelector('h2').innerHTML = this.parentElement.querySelector('h3').innerHTML;
         this.querySelector('.popup').className = 'popup';
         this.querySelector('.overlay').className = 'overlay';
+        saveWork();
     };
     popup.querySelector('.close-popup').onclick = function() {
         this.parentElement.parentElement.querySelector('.popup').className = 'popup hidden';
         this.parentElement.parentElement.querySelector('.overlay').className = 'overlay hidden';
+        saveWork();
     };
+    saveWork();
+    // task.ondragstart = function(event) {
+    //     dragstart_handler(event);
+    // };
 
     return task;
 };
@@ -131,6 +155,7 @@ function newPopup() {
         this.parentElement.parentElement.querySelector('p').innerHTML = this.parentElement.querySelector('textarea').value;
         this.parentElement.parentElement.querySelector('.popup').className = 'popup hidden';
         this.parentElement.parentElement.querySelector('.overlay').className = 'overlay hidden';
+        saveWork();
     };
 
     return popup;
@@ -140,3 +165,29 @@ function newOverlay() {
     overlay.className = 'overlay hidden';
     return overlay;
 }
+
+function saveWork() {
+    localStorage.clear();
+    toSave = document.querySelector('#board');
+    localStorage.work = toSave.innerHTML;
+}
+
+// function dragstart_handler(event) {
+//     // Add the target element's id to the data transfer object
+//     event.dataTransfer.setData("text/html", event.target);
+//    }
+
+// function dragover_handler(event) {
+//     event.preventDefault();
+//     // Set the dropEffect to move
+//     event.dataTransfer.dropEffect = "move"
+// }
+
+// function drop_handler(event) {
+//     event.preventDefault();
+//     // Get the id of the target and add the moved element to the target's DOM
+//     var data = event.dataTransfer.getData("text");
+//     console.log(data);
+//     debugger;
+//     event.target.appendChild(data);
+// }
