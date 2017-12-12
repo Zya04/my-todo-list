@@ -2,6 +2,76 @@ window.onload = function() {
     if (typeof localStorage.work != 'undefined') {
         document.querySelector('#board').innerHTML = localStorage.work;
     }
+    /*
+     * Fetch previously created items
+     */
+
+    oldCategories = document.querySelectorAll('.category');
+    oldTasks = document.querySelectorAll('.task');
+    oldRemoveCategory = document.querySelectorAll('.removeCategory');
+    oldNewTaskBtn = document.querySelectorAll('.addTask');
+    oldCategoryTitle = document.querySelectorAll('.category-title');
+    oldRemoveTaskBtn = document.querySelectorAll('.task span');
+    oldSaveButtons = document.querySelectorAll('.btn-task');
+    oldClosePopupBtn = document.querySelectorAll('.close-popup');
+
+    for (var i in oldRemoveTaskBtn) {
+        oldRemoveTaskBtn[i].onclick = function() {
+            this.parentElement.parentElement.removeChild(this.parentElement);
+        };
+    }
+
+    for (var i in oldCategoryTitle) {
+        oldCategoryTitle[i].onblur = function() {
+            saveWork();
+        };
+    }
+
+    for (var i in oldNewTaskBtn) {
+        oldNewTaskBtn[i].onclick = function() {
+            this.parentElement.parentElement.appendChild(newTask());
+            saveWork();
+        };
+     }
+
+    for (var i in oldTasks) {
+        oldTasks[i].onclick = function(event) {
+            if (event.target == this.querySelector('.popup').querySelector('.close-popup') || event.target == this.querySelector('.popup').querySelector('.btn-task') || event.target == this.querySelector('span')) {
+                return false;
+            }
+            this.querySelector('.popup').querySelector('h2').innerHTML = this.parentElement.querySelector('h3').innerHTML;
+            this.querySelector('.popup').className = 'popup';
+            this.querySelector('.overlay').className = 'overlay';
+            saveWork();
+        };
+    }
+    for (var i in oldRemoveCategory) {
+        oldRemoveCategory[i].onclick = function() {
+        this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement);
+        saveWork();
+        };
+    }
+    for (var i in oldClosePopupBtn) {
+        oldClosePopupBtn[i].onclick = function() {
+            this.parentElement.parentElement.querySelector('.popup').className = 'popup hidden';
+            this.parentElement.parentElement.querySelector('.overlay').className = 'overlay hidden';
+            saveWork();
+        };
+    }
+    for (var i in oldSaveButtons) {
+        oldSaveButtons[i].onclick = function() {
+            this.parentElement.parentElement.querySelector('h3').innerHTML = this.parentElement.querySelector('input[name="task-title"]').value;
+            this.parentElement.parentElement.querySelector('p').innerHTML = this.parentElement.querySelector('textarea').value;
+            this.parentElement.parentElement.querySelector('.popup').className = 'popup hidden';
+            this.parentElement.parentElement.querySelector('.overlay').className = 'overlay hidden';
+            saveWork();
+        };
+    }
+
+    /*
+     *
+     */
+
     newStyle = document.createElement("style");
     newStyle.type = "text/css"; 
     document.head.insertBefore(newStyle, null);
@@ -81,7 +151,7 @@ function newCategory() {
     addTaskButton.onclick = function() {
         this.parentElement.parentElement.appendChild(newTask());
         saveWork();
-    }
+    };
     return category;
 };
 
@@ -160,6 +230,7 @@ function newPopup() {
 
     return popup;
 }
+
 function newOverlay() {
     overlay = document.createElement('div');
     overlay.className = 'overlay hidden';
