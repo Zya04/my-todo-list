@@ -5,6 +5,7 @@ window.onload = function() {
     /* * * * * * * * * * * * * * * * * *
      * Fetch previously created items  *
      * * * * * * * * * * * * * * * * * */
+
     oldPopups = document.querySelectorAll('.popup');
     oldOverlays = document.querySelectorAll('.overlay');
     oldTasks = document.querySelectorAll('.task');
@@ -43,15 +44,27 @@ window.onload = function() {
     for (var i in oldTasks) {
         oldTasks[i].onclick = function(event) {
             if (event.target == this.querySelector('.popup').querySelector('.close-popup') || 
-                event.target == this.querySelector('.popup').querySelector('.btn-task') || 
-                event.target == this.querySelector('span')) {
-                return false;
-                }
-            this.querySelector('.popup').querySelector('input[name="task-title"').value = this.querySelector('h3').innerHTML;
-            this.querySelector('.popup').querySelector('textarea').value = this.querySelector('p').innerHTML;
-            this.querySelector('.popup').querySelector('h2').innerHTML = this.parentElement.querySelector('h3').innerHTML;
-            this.querySelector('.popup').className = 'popup';
-            this.querySelector('.overlay').className = 'overlay';
+            event.target == this.querySelector('.popup').querySelector('.btn-task') || 
+            event.target == this.querySelector('span')) {
+            return false;
+        }
+
+        thisTaskChildren = this.querySelector('.popup').children;
+        fillInputs = true;
+        for (j = 0; j < thisTaskChildren.length; j++) {
+            if (thisTaskChildren[j] == event.target ||
+                event.target == this.querySelector('.popup') ||
+                event.target == this.querySelector('.overlay')) {
+                    fillInputs = false;
+            }
+        }
+        if (fillInputs === true) {
+                this.querySelector('.popup').querySelector('input[name="task-title"').value = this.querySelector('h3').innerHTML;
+                this.querySelector('.popup').querySelector('textarea').value = this.querySelector('p').innerHTML;
+        }
+        this.querySelector('.popup').querySelector('h2').innerHTML = this.parentElement.querySelector('h3').innerHTML;
+        this.querySelector('.popup').className = 'popup';
+        this.querySelector('.overlay').className = 'overlay';
             saveWork();
         };
     }
@@ -172,9 +185,20 @@ function newTask() {
             return false;
         }
 
-        this.querySelector('.popup').querySelector('input[name="task-title"').value = this.querySelector('h3').innerHTML;
-        this.querySelector('.popup').querySelector('textarea').value = this.querySelector('p').innerHTML;
-
+        thisTaskChildren = this.querySelector('.popup').children;
+        fillInputs = true;
+        for (j = 0; j < thisTaskChildren.length; j++) {
+            if (thisTaskChildren[j] == event.target ||
+                event.target == this.querySelector('.popup') ||
+                event.target == this.querySelector('.overlay')) {
+                    fillInputs = false;
+            }
+        }
+        if (fillInputs === true) {
+                this.querySelector('.popup').querySelector('input[name="task-title"').value = this.querySelector('h3').innerHTML;
+                this.querySelector('.popup').querySelector('textarea').value = this.querySelector('p').innerHTML;
+        }
+        
         this.querySelector('.popup').querySelector('h2').innerHTML = this.parentElement.querySelector('h3').innerHTML;
         this.querySelector('.popup').className = 'popup';
         this.querySelector('.overlay').className = 'overlay';
@@ -263,6 +287,7 @@ function openPopup() {
         event.target == this.querySelector('span')) {
         return false;
     }
+
     this.querySelector('.popup').querySelector('h2').innerHTML = this.parentElement.querySelector('h3').innerHTML;
     this.querySelector('.popup').className = 'popup';
     this.querySelector('.overlay').className = 'overlay';
@@ -298,7 +323,23 @@ function deleteTask() {
     saveWork();
 }
 
+function dragStarted(e) {
+    source = e.target;
+    e.dataTransfer.setData("text/plain", e.target.innerHTML);
+    e.dataTransfer.effectAllowed = "move";
+}
 
+function draggingOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+}
+
+function dropped(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    source.innerHTML = e.target.innerHTML;
+    e.target.innerHTML = e.dataTransfer.getData("text/plain");
+}
 /* function dragstart_handler(event) {
  *     // Add the target element's id to the data transfer object
  *     event.dataTransfer.setData("text/html", event.target);
