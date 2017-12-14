@@ -331,7 +331,6 @@ function drag(ev) {
 
 function drop(ev) {
     ev.preventDefault();
-    debugger;
     var data = ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(data));
 }
