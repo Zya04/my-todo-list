@@ -141,12 +141,12 @@ function newCategory() {
     category.className = 'category';
     category.appendChild(categoryActions);
     category.appendChild(categoryTitle);
-    // category.ondragover = function(event) {
-    //     dragover_handler(event)
-    // };
-    // category.ondrop = function(event) {
-    //     drop_handler(event)
-    // };
+    category.ondrop = function() {
+        drop(ev);
+    }
+    category.ondrop = function() {
+        allowDrop(ev);
+    }
 
     categoryTitle.onblur = function() {
         saveWork();
@@ -165,7 +165,7 @@ function newCategory() {
 function newTask() {
     task = document.createElement('div');
     task.className = 'task';
-    //task.setAttribute('draggable', 'true');
+    task.setAttribute('draggable', 'true');
     task.appendChild(document.createElement('span'));
     task.querySelector('span').innerHTML = "&times;";
     task.appendChild(document.createElement('h3'));
@@ -208,9 +208,7 @@ function newTask() {
         closePopup.call(this);
     };
     saveWork();
-    // task.ondragstart = function(event) {
-    //     dragstart_handler(event);
-    // };
+    task.addEventListener('drag', drag);
 
     return task;
 };
@@ -323,38 +321,17 @@ function deleteTask() {
     saveWork();
 }
 
-function dragStarted(e) {
-    source = e.target;
-    e.dataTransfer.setData("text/plain", e.target.innerHTML);
-    e.dataTransfer.effectAllowed = "move";
+function allowDrop(ev) {
+    ev.preventDefault();
 }
 
-function draggingOver(e) {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = "move";
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
 }
 
-function dropped(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    source.innerHTML = e.target.innerHTML;
-    e.target.innerHTML = e.dataTransfer.getData("text/plain");
+function drop(ev) {
+    ev.preventDefault();
+    debugger;
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
 }
-/* function dragstart_handler(event) {
- *     // Add the target element's id to the data transfer object
- *     event.dataTransfer.setData("text/html", event.target);
- *    }
- * 
- * function dragover_handler(event) {
- *     event.preventDefault();
- *     // Set the dropEffect to move
- *     event.dataTransfer.dropEffect = "move"
- * }
- * function drop_handler(event) {
- *     event.preventDefault();
- *     // Get the id of the target and add the moved element to the target's DOM
- *     var data = event.dataTransfer.getData("text");
- *     console.log(data);
- *     debugger;
- * }
- *     event.target.appendChild(data); */
